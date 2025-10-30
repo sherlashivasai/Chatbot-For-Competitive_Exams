@@ -19,6 +19,7 @@ dependencies = [
     "python-dotenv",
     "ipykernel",
     "fastapi",
-    "uvicorn",
-    "python-dotenv"
+    "uvicorn[standard]",
+    "python-dotenv",
+    "sse-starlette"
 ]
