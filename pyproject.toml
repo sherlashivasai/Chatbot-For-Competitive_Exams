@@ -21,5 +21,7 @@ dependencies = [
     "fastapi",
     "uvicorn[standard]",
     "python-dotenv",
-    "sse-starlette"
+    "sse-starlette",
+    "redis",
+    "langchain-redis"
 ]

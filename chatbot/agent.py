@@ -9,7 +9,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langgraph.prebuilt import ToolNode
 from langgraph.graph import StateGraph, END
-from langgraph.checkpoint.memory import MemorySaver # For production, use RedisSaver
+from langgraph.checkpoint.redis import RedisSaver
 
 # --- 1. Setup Logging ---
 # Configures logging to output to console with a clear format.
@@ -206,7 +206,7 @@ def build_graph():
         workflow.add_edge("call_agent_model", END)
 
     # --- 7. Compile the Graph ---
-    checkpointer = MemorySaver()
+    checkpointer = RedisSaver.from_url(os.environ["REDIS_URL"])
     app = workflow.compile(checkpointer=checkpointer)
     logger.info("LangGraph agent compiled successfully.")
     return app
